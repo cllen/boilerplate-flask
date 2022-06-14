@@ -1,0 +1,54 @@
+{% extends 'admin/base.html' %}
+
+{% block access_control %}
+{% if current_view.current_user %}
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="icon-user"></i> {{ current_view.current_user.username }} <span class="caret"></span>
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="btn" onclick="logout();">退出登录</a>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+function logout() {
+ 
+  // To invalidate a basic auth login:
+  // 
+  //  1. Call this logout function.
+  //  2. It makes a GET request to an URL with false Basic Auth credentials
+  //  3. The URL returns a 401 Unauthorized
+  //  4. Forward to some "you-are-logged-out"-page
+  //  5. Done, the Basic Auth header is invalid now
+ 
+  jQuery.ajax({
+            type: "GET",
+            url: "",
+            async: false,
+            username: "xxx",
+            password: "xxx",
+            headers: { "Authorization": "Basic xxx" }
+  })
+  .done(function(){
+      // If we don't get an error, we actually got an error as we expect an 401!
+  })
+  .fail(function(){
+      // We expect to get an 401 Unauthorized error! In this case we are successfully 
+            // logged out and we redirect the user.
+      // window.location = "redirect_url";
+      location.reload();
+    });
+ 
+    return false;
+}
+
+</script>
+
+
+{% endif %}
+{% endblock %}

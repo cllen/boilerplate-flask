@@ -1,0 +1,78 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+
+<form action='.' method='post'>
+	<div clas='container'>
+
+		<!-- 第一行 -->
+		<div class="row">
+			<!-- 第一列 -->
+			<div class="col-md-6">
+				<div  class="card border-dark mb-3">
+					<div class="card-header">redis设置</div>
+					<div class="card-body">
+						<div class="row">
+
+							<div class="col-md-5">
+								redis状态:
+							</div>
+							{% if current_view.current_app.base.redis.client %}
+								<div class="col-md-7" style="color:green;">
+									<h5>{{ "已连接" }}</h5>
+								</div>
+							{% else %}
+								<div class="col-md-7" style="color:red;">
+									<h5>{{ "未连接" }}</h5>
+								</div>
+							{% endif %}
+							
+
+							<div class="col-md-5">
+								redis_db
+							</div>
+							<div class="col-md-7">
+								<input type="text" name="redis_db" value="{{data.redis_db}}">
+							</div>
+
+							<div class="col-md-5">
+								redis_host
+							</div>
+							<div class="col-md-7">
+								<input type="text" name="redis_host" value="{{data.redis_host}}">
+							</div>
+
+							<div class="col-md-5">
+								redis_port
+							</div>
+							<div class="col-md-7">
+								<input type="text" name="redis_port" value="{{data.redis_port}}">
+							</div>
+
+							<div class="col-md-5">
+								redis_password
+							</div>
+							<div class="col-md-7">
+								<input type="text" name="redis_password" value="{{data.redis_password or ''}}">
+							</div>
+
+	<!-- 						<div class="col-md-5">
+								access_token_expiration
+							</div>
+							<div class="col-md-7">
+								<input type="text" name="access_token_expiration" value="{{data.access_token_expiration}}">
+							</div> -->
+							
+					</div>
+					</div>
+				</div>
+			</div><!-- 第一列结束 -->
+		</div><!-- 第一行结束 -->
+		
+
+	</div>
+
+	<input type="submit" value="修改" class="btn btn-warning">
+</form>
+
+{% endblock %}

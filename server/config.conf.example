@@ -1,0 +1,45 @@
+# =================== 1. 运行环境配置 =========================
+
+# [mode]
+# 1. 这一项是决定用户使用的环境:production(生产环境)、development(开发环境)。
+# 2. 如果用于查看项目效果，只需要填写development，这一项比较方便。
+# 3. 如果用于上线使用，请填写production。
+
+config_name=development # production,development 
+
+# =================== 2. 业务配置 =========================
+
+# [business]
+# 1. 这一项是决定用户使用的环境:production(生产环境)、development(开发环境)。
+# 2. 如果用于查看项目效果，只需要填写development，这一项比较方便。
+# 3. 如果用于上线使用，请填写production。
+
+project_name=boilerplate
+project_chinese_name=xxx
+admin_username=admin
+admin_password=admin
+
+# =================== 3. 数据库配置 =========================
+
+# [db]
+# 1. 如果使用了开发环境development，则下面的数据库不需要填写。
+
+db_host=xxx
+db_port=3306
+db_username=xxx
+db_password=xxx
+
+# =================== 4. 服务配置 =========================
+
+# [service]
+# 1. 请将下面的“your-server-ip”改为你的服务器的外网ip。
+domain=http://localhost:6666
+
+
+# =================== 5. gunicorn配置（不建议修改） =========================
+
+# [gunicorn]
+# gunicorn绑定ip和port，如果使用nginx动态代理，可以填写为127.0.0.1，否则0.0.0.0
+# 如果不做反向代理，这里的端口要和上面的[service]一致。
+gunicorn_ip=0.0.0.0
+gunicorn_port=6666

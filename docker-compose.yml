@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+    boilerplate-flask:
+        container_name: boilerplate-flask
+        # command: gunicorn -w 4 -b 0.0.0.0:5000 -t 160 manage:app
+        #  --log-level DEBUG
+        build: ./
+        image: boilerplate_server_flask
+        ports:
+            - "6000:5000"
+        volumes:
+            - ./server:/home/server
+
+        networks:
+            - public-container
+        environment:
+            - PYTHONUNBUFFERED=0
+        restart: always
+        entrypoint:
+            - ./boot.sh
+networks:
+  public-container:
+    external: true
