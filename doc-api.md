@@ -20,13 +20,13 @@
 - REQUEST-PARAM:
 ```JSON
 {
-	'code':<str, 用户的微信小程序code>,
+    'code':<str, 用户的微信小程序code>,
 }
 ```
 - RESPONSE:
 ```JSON
 {
-	'error_code':<int, 错误代码>,
+    'error_code':<int, 错误代码>,
     'token':<str, 用户token>,
 }
 ```
@@ -41,21 +41,21 @@
 - REQUEST-HEADERS:
 ```JSON
 {
-	'content-type':'application/json',
+    'content-type':'application/json',
     'authorization':'wechat <token>',
 }
 ```
 - REQUEST-PARAM:
 ```JSON
 {
-	'iv':<str, 微信服务器返回的iv，参考微信小程序文档，登录部分>,
+    'iv':<str, 微信服务器返回的iv，参考微信小程序文档，登录部分>,
     'encrypted_data':<str, 微信服务器返回的encrypted_data，参考微信小程序文档，登录部分>,
 }
 ```
 - RESPONSE:
 ```JSON
 {
-	'error_code':<int, 错误代码>,
+    'error_code':<int, 错误代码>,
     'user':{
         'id':<int, 微信用户id>,
         'nickname':<str, 微信用户昵称>,
