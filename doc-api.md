@@ -12,7 +12,7 @@
 
 # wechat模块接口
 
-##### 微信小程序登录
+#### 微信小程序登录
 
 - URL: `/boilerplate/wechat/api/v1/user`
 - METHOD: `POST`
@@ -33,7 +33,7 @@
 - NOTE:
     1. 返回的token，在请求其他接口时候，格式为`headers={'authorization':'wechat <token>'}`，如`headers={'authorization':'wechat xxx'}`
 
-##### 微信小程序更新用户信息（授权，包括敏感信息）
+#### 微信小程序更新用户信息（授权，包括敏感信息）
 
 - URL: `/boilerplate/wechat/api/v1/user`
 - METHOD: `PUT`
@@ -67,15 +67,15 @@
 - NOTE:
     1. 返回的token，在请求其他接口时候，格式为`headers={'authorization':'wechat <token>'}`
 
-##### 微信公众号授权接口
+#### 微信公众号授权接口
 
 略
 
-##### 微信公众号授权回调接口
+#### 微信公众号授权回调接口
 
 略
 
-##### 微信公众号网关接口（接收来自微信服务器的消息，如关注、取消关注等事件）
+#### 微信公众号网关接口（接收来自微信服务器的消息，如关注、取消关注等事件）
 
 略
 
