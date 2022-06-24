@@ -1,4 +1,4 @@
-source /home/ubuntu/projects/cms-flask/venv/bin/activate
+source /home/ubuntu/projects/boilerplate-flask/venv/bin/activate
 
 source config.conf
 
