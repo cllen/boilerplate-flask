@@ -51,3 +51,4 @@ colour
 json2html
 
 wechatpy
+flask-babelex
