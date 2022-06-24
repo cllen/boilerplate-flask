@@ -15,7 +15,7 @@ config_name=development # production,development
 # 3. 如果用于上线使用，请填写production。
 
 project_name=boilerplate
-project_chinese_name=xxx
+project_chinese_name=boilerplate系统
 admin_username=admin
 admin_password=admin
 

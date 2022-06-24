@@ -1,3 +1,9 @@
+"""
+	What this etc.py being different from config.conf is that this
+	etc.py is python objected configuration, and config.conf is
+	string configuration.
+"""
+
 import os
 import abc
 import socket
@@ -5,12 +11,12 @@ basedir = os.path.abspath(os.getcwd())
 
 config_path = os.path.join(
 	#os.path.dirname(				# 1code
-		os.path.dirname(			# vocabulary-flask
+		# os.path.dirname(			# vocabulary-flask
 			os.path.dirname( 		# server
 				os.path.dirname( 	# etc
 					__file__
 				)
-			)
+		#	)
 		# )
 	),
 	'config.conf'
@@ -22,7 +28,7 @@ parser = ConfigParser()
 with open(config_path,encoding='utf-8') as stream:
 	parser.read_string("[top]\n" + stream.read())  # This line does the trick.
 
-# project
+# business
 project_name = parser.get('top', 'project_name')
 project_chinese_name = parser.get('top', 'project_chinese_name')
 

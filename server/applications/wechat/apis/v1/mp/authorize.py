@@ -9,9 +9,9 @@ logger = logging.getLogger(__name__)
 """
 	相当于孟哥的locator接口
 """
-@api.route('/authorize')
+@ns.route('/authorize')
 class Authorize(Resource):
-	@api.doc()
+	@ns.doc()
 	# @parse_with(parser=GetParser,exception=JSONException)
 	def get(self):
 		mpauth = MpAuth()

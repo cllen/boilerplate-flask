@@ -3,7 +3,7 @@ import logging
 
 from flask import redirect,url_for
 
-from . import bp,bp_base
+from .. import bp
 
 from ....utils.auth import (
 	current_user,

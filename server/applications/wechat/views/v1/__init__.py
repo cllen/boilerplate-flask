@@ -1,5 +1,8 @@
+from flask import Blueprint
+from flask_restx import Api
+
+bp = Blueprint('wechat-view',__name__)
+
 from .mp import (
-	bp as bp_mp,
-	bp_base as bp_mp_base,
+	index,
 )
-# from .mp import *

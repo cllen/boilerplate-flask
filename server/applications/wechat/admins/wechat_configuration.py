@@ -2,8 +2,8 @@ from flask import request, current_app
 from flask_admin import expose, BaseView
 
 # from applications.base.utils.flask_admin.view.template import TemplateMixin
-from applications.base.utils.flask_admin.view.login_basichttp import LoginMixin
-from applications.base.utils.flask_admin.view.query import QueryMixin
+from applications.base.utils.flask_admin.login import LoginMixin
+from applications.base.utils.flask_admin.query import QueryMixin
 
 import logging
 logger = logging.getLogger(__name__)

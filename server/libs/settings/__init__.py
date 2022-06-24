@@ -1,5 +1,8 @@
 import abc
 
+import logging
+logger = logging.getLogger(__name__)
+
 class BaseSettings:
 
 	"""
@@ -16,13 +19,12 @@ class BaseSettings:
 			self.default = default
 
 	def __getattr__(self,key):
-		try:
-			self.instance = self._first()
-		#if self.instance:
-		except:
-			return self.default.get(key,0)
+		self.instance = self._first()
+		logger.debug(self.instance)
+		if not self.instance:
+			return self.default.get(key,"")
 		else:
-			return getattr(self.instance,key) or self.default.get(key,0)
+			return getattr(self.instance,key) or self.default.get(key,"")
 
 	def __setattr__(self,key,value):
 		if key in ['default','instance']:

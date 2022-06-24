@@ -31,8 +31,8 @@ class Base:
 
 		app.base = self
 
-		admin.add_view(BaseConfigurationAdmin(name='基本设置',category="系统数据"))
-		admin.add_view(BaseUserAdmin(BaseUserModel, db.session, name=u'基本用户',category="系统数据"))
+		admin.add_view(BaseConfigurationAdmin(name='基本设置',category="基本数据"))
+		admin.add_view(BaseUserAdmin(BaseUserModel, db.session, name=u'基本用户',category="基本数据"))
 
 		from .views import bp as bp_views
 		app.register_blueprint(

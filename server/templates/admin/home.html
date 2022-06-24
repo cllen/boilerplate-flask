@@ -3,10 +3,10 @@
 {% block body %}
 
 
-{% if current_view.current_user %}
-	你好，{{ current_view.current_user.username }} {{ {"学生":"同学","教师":"老师","管理员":"管理员",}[current_view.current_user.type] }}! 欢迎登录{{ current_view.current_app.config['PROJECT_CHINESE_NAME'] }}！</a>
+{% if current_user %}
+	你好，{{ current_user.username }}, 欢迎登录{{ current_app.config['PROJECT_CHINESE_NAME'] }}！</a>
 {% else %}
-	欢迎访问{{ current_view.current_app.config['PROJECT_CHINESE_NAME'] }}！您未登录，请<a href="{{ current_view.current_app.base.urls.login_url }}">使用统一登录</a>！
+	欢迎访问{{ current_app.config['PROJECT_CHINESE_NAME'] }}！您未登录，请<a href="{{ current_view.current_app.base.urls.login_url }}">使用统一登录</a>！
 {% endif %}
 
 

@@ -12,13 +12,13 @@ from ....schemas.marshals.miniapp.user import(
 	Put as PutMarshal,
 )
 
-@api.route('/user')
+@ns.route('/user')
 class Single(Resource):
 
-	@api.doc(parser=PostParser)
-	@catch_exception()
+	@ns.doc(parser=PostParser)
+	# @catch_exception()
 	@parse_with(parser=PostParser,exception=JSONException)
-	@api.marshal_with(PostMarshal)
+	@ns.marshal_with(PostMarshal)
 	def post(self):
 
 		args = PostParser.parse_args()
@@ -31,11 +31,11 @@ class Single(Resource):
 			'token':token,
 		}
 
-	@api.doc(parser=PutParser)
-	@catch_exception()
+	@ns.doc(parser=PutParser)
+	# @catch_exception()
 	@auth(exception=JSONException)
 	@parse_with(parser=PutParser,exception=JSONException)
-	@api.marshal_with(PutMarshal)
+	@ns.marshal_with(PutMarshal)
 	def put(self):
 
 		args = PutParser.parse_args()

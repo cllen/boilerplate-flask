@@ -1,0 +1,2 @@
+class RedisKeys:
+    throttle = "throttle:{}"

@@ -8,10 +8,10 @@ from ....schemas.parsers.mpapp.gateway import(
 """
 	用户接受微信通知的接口
 """
-@api.route('/gateway')
+@ns.route('/gateway')
 class Gateway(Resource):
 
-	@api.doc(parser=VerificationParser)
+	@ns.doc(parser=VerificationParser)
 	@parse_with(parser=VerificationParser,exception=JSONException)
 	def get(self):
 
@@ -29,7 +29,7 @@ class Gateway(Resource):
 		return payload['echostr']
 
 
-	@api.doc(parser=VerificationParser)
+	@ns.doc(parser=VerificationParser)
 	def post(self):
 
 		try:

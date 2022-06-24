@@ -3,7 +3,7 @@ import click
 
 from applications import create_app
 
-# from data import insert_initual_data
+from data import insert_dev_data
 # from tests import insert_test_data
 
 from etc import config, DevelopmentConfig
@@ -39,8 +39,8 @@ def _depoly():
             raise Exception('环境变量设置错误！')
 
         print('正在导入数据...')
-        # insert_initual_data(app.db.session)
-        # app.db.session.commit()
+        insert_dev_data(app.db.session)
+        app.db.session.commit()
 
         print('创建数据库成功！')
 
@@ -68,7 +68,7 @@ def run_tests(test_names=None):
 
     app.db.drop_all()
     app.db.create_all()
-    insert_test_data(app.db.session)
+    # insert_test_data(app.db.session)
     app.db.session.commit()
 
     print('2/2 正在插入测试数据...')
@@ -112,4 +112,4 @@ def run_tests(test_names=None):
         print('HTML version: file://%s/index.html' % covdir)
 
 if __name__ == '__main__':
-    app.run(debug=True)# ,port=80,host='0.0.0.0'
+    app.run(debug=True, port='80')# ,port=80,host='0.0.0.0'

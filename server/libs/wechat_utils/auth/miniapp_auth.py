@@ -32,6 +32,7 @@ class BaseAuth:
 	REQUEST_FREQUENCY = RequestFrequency('request frequency!')
 	USERINFO_DECRYPT_FAILED = UserinfoDecryptFailed('userinfo decrypt failed!')
 	UNEXPECTED_ERROR = UnexpectedError('unexpected error!')
+	APPID_INVALID = CodeInvalid('appid invalid!')
 
 	@property
 	@abc.abstractmethod
@@ -85,6 +86,8 @@ class BaseAuth:
 			raise self.CODE_INVALID
 		elif _userinfo.get('errcode') == 45011:
 			raise self.REQUEST_FREQUENCY
+		elif _userinfo.get('errcode') == 40013:
+			raise self.APPID_INVALID
 		elif _userinfo.get('errcode') in [0, None, ]:
 			pass
 		else:

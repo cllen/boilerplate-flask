@@ -9,10 +9,10 @@ from ....schemas.parsers.mpapp.callback import(
 """
 	相当于孟哥的oauth接口
 """
-@api.route('/callback')
+@ns.route('/callback')
 class Callback(Resource):
 
-	@api.doc(parser=GetParser)
+	@ns.doc(parser=GetParser)
 	@parse_with(parser=GetParser,exception=JSONException)
 	def get(self):
 

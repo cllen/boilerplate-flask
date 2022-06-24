@@ -3,7 +3,7 @@ from flask_restx import Resource
 
 from flask import request
 
-from . import api
+from .. import api
 
 from ....utils.auth import MiniappAuth
 
@@ -13,4 +13,6 @@ from exceptions import JSONException
 
 from ....utils.auth import auth
 
-from ....utils.logger import catch_exception
+ns = api.namespace('wechat-miniapp')
+
+# from ....utils.logger import catch_exception

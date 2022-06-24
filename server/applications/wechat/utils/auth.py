@@ -53,6 +53,7 @@ class MiniappAuth(
 	REQUEST_FREQUENCY = JSONException(12107)
 	USERINFO_DECRYPT_FAILED = JSONException(12108)
 	UNEXPECTED_ERROR = JSONException(12109)
+	APPID_INVALID = JSONException(12110)
 
 	@property
 	def appid(self):
@@ -182,7 +183,9 @@ def auth(exception=JSONException):
 		@wraps(func)
 		def wrapper2(*args,**kwargs):
 
-			token = request.environ.get('HTTP_TOKEN')
+			authorization = request.environ.get('HTTP_AUTHORIZATION')
+			logger.debug(request.environ)
+			auth_type,token = authorization.split(' ')
 			miniappauth = MiniappAuth()
 			logger.debug(token)
 			if not token:

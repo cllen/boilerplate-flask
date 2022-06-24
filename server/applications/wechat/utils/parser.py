@@ -19,13 +19,14 @@ def parse_with(parser,exception=JSONException):
 			try:
 				json = parser.parse_args()
 			except Exception as e:
-				logger.debug('>> parse_with')
+				logger.debug('>>>> parse_with')
 				# logger.debug(e)
 				# logger.debug(traceback.format_exc())
 				logger.debug(request.values)
 				logger.debug(request.get_json())
 				logger.debug(request.args)
 				# logger.debug(request.__dict__)
+				logger.error(traceback.format_exc())
 				raise exception(10003)
 
 			args[0].json = json

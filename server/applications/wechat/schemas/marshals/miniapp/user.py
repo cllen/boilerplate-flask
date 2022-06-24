@@ -1,7 +1,7 @@
 #coding:utf8
-from flask_restx import Model,fields
-
-User = Model(
+from flask_restx import fields
+from ....apis.v1 import api
+User = api.model(
 	'User',
 	{
 		'id':fields.String(),
@@ -11,7 +11,7 @@ User = Model(
 	}
 )
 
-Post = Model(
+Post = api.model(
 	'Single',
 	{
 		'error_code':fields.Integer(),
@@ -19,7 +19,7 @@ Post = Model(
 	},
 )
 
-Put = Model(
+Put = api.model(
 	'Single',
 	{
 		'error_code':fields.Integer(),
@@ -27,7 +27,7 @@ Put = Model(
 	},
 )
 
-List = Model(
+List = api.model(
 	'List',
 	{
 		'error_code':fields.Integer(),

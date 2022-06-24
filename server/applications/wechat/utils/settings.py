@@ -18,8 +18,8 @@ class WechatSettings(BaseSettings,metaclass=Singleton):
 		'mch_id':'xxx',
 		'mch_secret':'xxx',
 
-		'oauth_callback_url':'http://ip:port/xxx/wechat-mp/api/v1/calback',
-		'post_oauth_beforeauthorize_url_default':'http://ip:port/xxx/wechat-mp/view/index',
+		'oauth_callback_url':'http://example.com/boilerplate/wechat-mp/api/v1/calback',
+		'post_oauth_beforeauthorize_url_default':'http://example.com/boilerplate/wechat-mp/view/index',
 		'oauth_beforeauthorize_token_expiration':99999,
 		'mp_token':'???',
 	}
@@ -29,12 +29,12 @@ class WechatSettings(BaseSettings,metaclass=Singleton):
 
 	def _save(self,**kwargs):
 		instance = WechatConfigurationModel(**kwargs)
-		self.db.session.add(instance)
-		self.db.session.commit()
+		db.session.add(instance)
+		db.session.commit()
 		return instance
 
 	def _update(self,instance,**kwargs):
 		for key,value in kwargs.items():
 			setattr(instance,key,value)
-		self.db.session.commit()
+		db.session.commit()
 		return instance

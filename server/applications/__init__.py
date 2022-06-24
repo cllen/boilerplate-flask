@@ -10,6 +10,9 @@ from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from flask_pagedown import PageDown
 from flask_moment import Moment
+from flask_babelex import Babel
+
+babel = Babel()
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -101,6 +104,13 @@ def create_app(config_name='default',import_name=__name__):
 	bootstrap.init_app(app)
 	pagedown.init_app(app)
 	moment.init_app(app)
+	babel.init_app(app)
+	@babel.localeselector
+	def get_locale():
+		from flask import request,session
+		if request.args.get('lang'):
+			session['lang'] = request.args.get('lang')
+		return session.get('lang', 'zh_CN')
 
 	# applications
 	base.init_app(app,admin,db)

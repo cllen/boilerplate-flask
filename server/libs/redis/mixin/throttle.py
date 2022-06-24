@@ -1,7 +1,7 @@
 #coding:utf8
 import json
 import time
-from ...constants import RedisKeys
+from ..constants import RedisKeys
 
 class ThrottleMixin:
 
@@ -13,13 +13,12 @@ class ThrottleMixin:
 			seconds
 		)
 
-	def throttle_set(self,openid,seconds=60):
+	def throttle_set(self,openid):
 		return self._throttle_set(
-			RedisKeys.throttle.format(openid),
-			seconds
+			RedisKeys.throttle.format(openid)
 		)
 
-	def _throttle_get(self,key,seconds=60):
+	def _throttle_get(self,key,seconds):
 
 		value = self.get(key)
 		current_time = time.time()
@@ -29,20 +28,20 @@ class ThrottleMixin:
 				historys = json.loads(value)
 				
 				# 最后一个时间是最远时间，删除
-				while historys and history[-1] < current_time - seconds:
+				while historys and historys[-1] < current_time - seconds:
 					historys.pop()
 
 				_historys = json.dumps(historys)
 
 				self.set(key,expires_in=self.throttle_expired,value=_historys)
 
-				return history
+				return historys
 			except:
 				return []
 		else:
 			return []
 
-	def _throttle_set(self,openid):
+	def _throttle_set(self,key):
 		value = self.get(key)
 		current_time = time.time()
 		if value:

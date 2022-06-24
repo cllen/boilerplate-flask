@@ -67,6 +67,10 @@ error_messages = {
 		'error_message':"未知错误！",
 		'http_code':400,
 	},
+	12110:{
+		'error_message':"管理后台设置的appid非法！",
+		'http_code':400,
+	},
 
 	# cms模块部分
 	# 略
