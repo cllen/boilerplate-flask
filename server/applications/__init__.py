@@ -1,6 +1,8 @@
 # 标准库
 import os
 import logging
+from utils.log import init_logging
+init_logging()
 
 # 第三方库
 from flask import Flask, Blueprint 
@@ -12,9 +14,10 @@ from flask_pagedown import PageDown
 from flask_moment import Moment
 from flask_babelex import Babel
 
+
 babel = Babel()
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 
 # 自己的库
@@ -111,6 +114,7 @@ def create_app(config_name='default',import_name=__name__):
 		if request.args.get('lang'):
 			session['lang'] = request.args.get('lang')
 		return session.get('lang', 'zh_CN')
+	
 
 	# applications
 	base.init_app(app,admin,db)

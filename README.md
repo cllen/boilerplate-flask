@@ -22,27 +22,19 @@
 
 # 使用
 
-##### 安装、运行、卸载（安装在宿主机器上）
+1. 安装
+    1. [bash方式安装](./docs/1.bash方式安装.md)
+    2. [docker方式安装](./docs/2.docker方式安装.md)
+2. 测试
+    1. [功能测试](./docs/3.功能测试.md)
+    2. [性能测试](./docs/4.性能测试.md)
+3. 卸载
+    1. [卸载](./docs/5.卸载.md)
+4. 文档
+    1. [架构文档](./docs/6.架构文档.md)
+    2. [接口文档](./docs/7.接口文档.md)
 
-1. 修改配置文件：
 
-```shell
-cp config.conf.example config.conf
-
-vim config.conf
-```
-
-2. 执行安装脚本：
-
-```
-bash install.sh
-```
-
-3. 安装成功，如需卸载，执行卸载脚本：
-
-```shell
-bash uninstall.sh
-```
 
 ##### 安装、运行、卸载（安装在docker容器里）
 

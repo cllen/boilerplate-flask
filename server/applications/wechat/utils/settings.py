@@ -18,7 +18,7 @@ class WechatSettings(BaseSettings,metaclass=Singleton):
 		'mch_id':'xxx',
 		'mch_secret':'xxx',
 
-		'oauth_callback_url':'http://example.com/boilerplate/wechat-mp/api/v1/calback',
+		'oauth_callback_url':'http://example.com/boilerplate/wechat-mp/api/v1/callback',
 		'post_oauth_beforeauthorize_url_default':'http://example.com/boilerplate/wechat-mp/view/index',
 		'oauth_beforeauthorize_token_expiration':99999,
 		'mp_token':'???',
