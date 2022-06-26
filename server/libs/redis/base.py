@@ -8,47 +8,7 @@ import abc
 
 # log
 import logging
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-
-"""""""""""""""""""""""""""
-
-Client
-======
-* author	:	黄旭辉
-* update	:	２０１９年０６月１５日１８：０５：０２
-
-
-what
-----
-A class-based redis client
-
-why
----
-* Singleton	:	new one anywhere anytime you want,it will make itself's connention singleton.
-* extend	:	you can inherit it and add some functions you want.
-
-how-usage
----------
-
-using it straightly is not a good idea.
-you should use it like:
-
-```python
-class MyClient(object):
-	def __new__(self):
-		return Client(
-			host=config.host,
-			port=config.port,
-			db=config.db,
-			password=config.password)
-
-myclient = MyClient()
-myclient.client.set(name='hello', value='world', ex=60*1, px=None, nx=False, xx=False')
-myclient.get('hello')
-```
-
-"""""""""""""""""""""""""""
 
 
 class BaseRedis:
@@ -97,7 +57,7 @@ class BaseRedis:
 			self.client.ping()
 		except redis.exceptions.ConnectionError as e:
 			logger.error(
-				'redis connection error: %s',
+				'>>>> redis connection error: %s',
 				traceback.format_exc(),
 			)
 			self.client = None
@@ -116,5 +76,4 @@ class BaseRedis:
 			return None
 
 	def set(self,key,expires_in,value):
-		
 		self.client.setex(key, int(expires_in), value)

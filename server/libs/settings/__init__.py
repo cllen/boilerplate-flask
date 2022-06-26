@@ -5,10 +5,6 @@ logger = logging.getLogger(__name__)
 
 class BaseSettings:
 
-	"""
-		同理auth，将miniorm设置为变量，使用了控制反转技巧。
-	"""
-
 	# This attribute needs to be override.
 	default = {}
 	instance = None
