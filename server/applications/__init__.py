@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 # 业务代码
 from .base import Base
 from .wechat import Wechat
-# from .cms import #
+from .cms import CMS
 
 from etc import config
 
@@ -40,7 +40,7 @@ from .base.admins import (
 # 实例化
 base = Base()
 wechat = Wechat()
-# cms = CMS()
+cms = CMS()
 
 migrate = Migrate()
 bootstrap = Bootstrap()
@@ -66,7 +66,9 @@ def create_app(config_name='default',import_name=__name__):
 	app_context = app.app_context()
 	app_context.push()
 
-	# 模板路径
+	"""
+		模板路径
+	"""
 	template_path = os.path.abspath(
 		os.path.join(
 				os.path.dirname(__file__)
@@ -77,6 +79,7 @@ def create_app(config_name='default',import_name=__name__):
 	)
 	bp_template = Blueprint('template',__name__,template_folder=template_path)
 	app.register_blueprint(bp_template)
+
 
 	"""
 		init
@@ -108,18 +111,18 @@ def create_app(config_name='default',import_name=__name__):
 	pagedown.init_app(app)
 	moment.init_app(app)
 	babel.init_app(app)
-	@babel.localeselector
-	def get_locale():
-		from flask import request,session
-		if request.args.get('lang'):
-			session['lang'] = request.args.get('lang')
-		return session.get('lang', 'zh_CN')
+	# @babel.localeselector
+	# def get_locale():
+	# 	from flask import request,session
+	# 	if request.args.get('lang'):
+	# 		session['lang'] = request.args.get('lang')
+	# 	return session.get('lang', 'zh_CN')
 	
 
 	# applications
 	base.init_app(app,admin,db)
 	wechat.init_app(app,admin,db)
-	# cms.init_app(app,admin,db)
+	cms.init_app(app,admin,db)
 
 	app_context.pop()
 

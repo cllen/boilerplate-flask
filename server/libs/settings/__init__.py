@@ -16,7 +16,7 @@ class BaseSettings:
 
 	def __getattr__(self,key):
 		self.instance = self._first()
-		logger.debug(self.instance)
+		# logger.debug(self.instance)
 		if not self.instance:
 			return self.default.get(key,"")
 		else:

@@ -7,7 +7,15 @@
 import os
 import abc
 import socket
-basedir = os.path.abspath(os.getcwd())
+# basedir = os.path.abspath(os.getcwd())
+
+basedir = os.path.dirname( 		# server
+			os.path.dirname( 	# etc
+				__file__
+			)
+		)
+
+print(basedir)
 
 config_path = os.path.join(
 	#os.path.dirname(				# 1code
@@ -110,15 +118,11 @@ class BaseConfig(SystemConfig):
 
 class DevelopmentConfig(BaseConfig):
 
-	
-
-	# sqlalchemy
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, project_name+'-dev.sqlite')
 
 
 class TestingConfig(BaseConfig):
 
-	# sqlalchemy
 	SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, project_name+'-testing.sqlite')
 
 class ProductionConfig(BaseConfig):

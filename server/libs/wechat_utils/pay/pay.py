@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 
 
 
-from .wechat_pay_helper import WeixinPay,build_pay_sign
+from ._pay_helper import WeixinPay,build_pay_sign
 import time
 
 
@@ -47,6 +47,13 @@ def pay(
     # 时间戳
     time_stamp = str(int(time.time()))
 
+    """
+
+        unified_order['return_code']的值为：'SUCCESS','PRDERPAID'，根据这个值判断支付结果，然后修改业务数据，如订单状态。
+        data_for_frontend: 将这些数据返回给前端。
+        参考微信支付文档：https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_4.shtml
+
+    """
     return {
         'return_code':unified_order.get('return_code'),#SUCCESS,PRDERPAID
         'err_code':unified_order.get('err_code'),#PRDERPAID

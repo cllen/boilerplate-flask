@@ -15,7 +15,70 @@ from wechatpy.utils import check_signature, random_string
 from ..decrypt import Decrypt
 from ..common import Random
 
-class BaseAuth:
+
+"""
+suage
+=====
+
+from libs.wechat_utils.auth import BaseMpAuth
+
+from werkzeug.exceptions import HTTPException
+
+class MpAuth(BaseMpAuth, metaclass=Singleton):
+
+	@property
+	def appid(self):
+		return 'xxx'
+
+	@property
+	def app_secret(self):
+		return 'xxx'
+
+	@property
+	def token_secret_key(self):
+		return 'xxx'
+
+	@property
+	def token_salt(self):
+		return 'xxx'
+
+	@property
+	def token_expiration(self):
+		return 99999
+
+	@property
+	def callback_url(self):
+		return 'xxx'
+
+	@property
+	def post_beforeauthorize_default(self):
+		return 'http://example.com/index'
+
+	def _persist_beforeauthorize_url(self,token, referrer):
+		storage[token]=referrer
+		return None
+
+	def _retrieve_beforeauthorize_url(self, state):
+		referrer = storage.get(token)
+		return referrer
+
+	def _get_user_by_openid(self, openid):
+		return User
+
+	def _save_user(self, **kargs):
+		wechat_user = WechatUserModel(**kargs)
+		return None
+
+	def _update_user(self,openid,decrypted_data):
+		return None
+
+mpauth = MpAuth()
+redirect_url = mpauth.generate_authorize_url(request.referrer)
+token,user = mpauth.oauth_login(code='xxx')
+payload = mpauth.parse_message(request.data.decode('utf8'))
+"""
+
+class BaseMpAuth:
 
 	"""
 		1. 提供重定向功能
@@ -114,12 +177,12 @@ class BaseAuth:
 		if state:
 			url_list.extend(['&state=', state])
 		url_list.append('#wechat_redirect')
-		logger.info('>>> {}'.format(url_list))
+		logger.info('>>>> {}'.format(url_list))
 		return ''.join(url_list)
 
 	def generate_authorize_url(self, referrer):
 
-		logger.debug('>> generate_authorize_url')
+		logger.debug('>>>> generate_authorize_url')
 		logger.debug(referrer)
 
 		"""

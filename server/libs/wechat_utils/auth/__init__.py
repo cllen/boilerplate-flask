@@ -1,5 +1,5 @@
-from .miniapp_auth import BaseAuth as BaseMiniappAuth
-from .mp_auth import BaseAuth as BaseMpAuth
+from .miniapp import BaseMiniappAuth
+from .mp import BaseMpAuth
 
 from .mixin import (
 	PhoneNumberMixin,

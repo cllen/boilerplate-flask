@@ -2,21 +2,11 @@
 
 
 
-"""""""""""""""""""""""""""""""""""""""
-pay.py
-=============
-* 小弟在此感谢前面两位大佬  :       goodspeed、zongxiao
-* 搬运工                 :      黄旭辉
-* 时间                   :        ２０１９年０６月１５日１５：１７：３７
-what
-----
-wechat_pay.py is a framework-agnostic library for wechat pay.
-why
----
-no why
-how
----
-```python
+"""""""""""""""""""""""""""
+
+使用方法
+=======
+
 from pay import WeixinPay
 # 创建支付对象
 wxpay = WeixinPay(
@@ -39,16 +29,8 @@ elif unified_order['err_code'] == 'PRDERPAID':
     pass
 else:
     pass
-```
-"""""""""""""""""""""""""""""""""""""""
 
-
-
-
-
-
-
-
+"""""""""""""""""""""""""""
 
 
 

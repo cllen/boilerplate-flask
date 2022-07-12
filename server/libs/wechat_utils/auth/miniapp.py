@@ -21,7 +21,66 @@ from ..exceptions import (
 	UnexpectedError,
 )
 
-class BaseAuth:
+"""
+suage
+=====
+
+from libs.wechat_utils.auth import (
+	BaseMiniappAuth,
+	PhoneNumberMixin,
+	AccessTokenMixin,
+)
+from werkzeug.exceptions import HTTPException
+
+class MiniappAuth(
+	BaseMiniappAuth,
+
+	PhoneNumberMixin, 
+	AccessTokenMixin,
+	metaclass=Singleton):
+ 
+	# flask
+	TOKEN_EXPIRED = HTTPException(12101)
+
+	@property
+	def appid(self):
+		return 'xxx'
+
+	@property
+	def app_secret(self):
+		return 'xxx'
+
+	@property
+	def token_secret_key(self):
+		return 'xxx'
+
+	@property
+	def token_salt(self):
+		return 'xxx'
+
+	@property
+	def token_expiration(self):
+		return 99999
+
+	@property
+	def _get_access_token(self):
+		return 'xxx'
+
+	@property
+	def _save_access_token(self,access_token):
+		return None
+
+	def _save_user(self,userinfo):
+		return None
+
+	def _update_user(self,openid,decrypted_data):
+		return None
+
+miniappauth = MiniappAuth()
+token,user = miniappauth.login_by_code(code='xxx')
+"""
+
+class BaseMiniappAuth:
 
 	TOKEN_EXPIRED = TokenExpired('Token expired!')
 	TOKEN_CORRUPTED = TokenCorrupted('Token corrupted!')

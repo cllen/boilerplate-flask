@@ -8,7 +8,7 @@ from applications.base.utils.flask_admin.query import QueryMixin
 import logging
 logger = logging.getLogger(__name__)
 
-from applications.wechat import wechat_settings
+from .. import wechat_settings
 
 class WechatConfiguration(LoginMixin,QueryMixin,BaseView):
 

@@ -2,16 +2,34 @@ import unittest
 from applications import create_app
 from base64 import b64encode
 
-class TestLoginTestCase(unittest.TestCase):
+from applications.base.services import (
+    login as login_service
+)
+
+from data.test import test_admin_username,test_admin_password
+
+import logging
+logging.disable(logging.CRITICAL)
+
+class TestBaseTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.app = create_app()
+        self.app = create_app('development','development')
         self.app_context = self.app.app_context()
         self.app_context.push()
         self.client = self.app.test_client(use_cookies=True)
     
     def tearDown(self):
         self.app_context.pop()
+
+    def test_service_login_success(self):
+        logined_user = login_service(test_admin_username,test_admin_password)
+        self.assertEqual(logined_user.username, test_admin_username)
+        self.assertEqual(logined_user.password, test_admin_password)
+    
+    def test_service_login_fail(self):
+        logined_user = login_service(test_admin_username,'123')
+        self.assertEqual(logined_user, False)
 
     def get_api_headers(self, username, password):
         return {
@@ -26,11 +44,12 @@ class TestLoginTestCase(unittest.TestCase):
         response = self.client.get(
             log_url,
             headers=self.get_api_headers(
-                self.app.config['flask_admin_username'], 
-                self.app.config['flask_admin_password']
+                test_admin_username, 
+                test_admin_password
             ),
         )
-        self.assertEqual(response.status_code, 200)
+        # 重定向
+        self.assertEqual(response.status_code, 302)
     
     def test_admin_login_unconfirmed(self):
         log_url = "{}/base/login".format(self.app.config['PROJECT_NAME'])
@@ -41,4 +60,5 @@ class TestLoginTestCase(unittest.TestCase):
                 'wrong-password', 
             ),
         )
-        self.assertEqual(response.status_code, 403)
+        # 认证失败
+        self.assertEqual(response.status_code, 401)

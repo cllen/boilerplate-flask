@@ -14,7 +14,7 @@ class PhoneNumberMixin:
 	def access_token(self):
 		pass 
 
-	def get_phone_number(user,code):
+	def get_phone_number(self,user,code):
 		json_response = get_phone_number(self.access_token,code)
 		
 		if json_response['errcode'] == 0:

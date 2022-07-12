@@ -33,7 +33,7 @@ def _login():
         referrer = session.get('referrer')
         session['referrer'] = None
         # return redirect(referrer)
-    return redirect(url_for('vocabulary-views.home'))
+    return redirect(url_for('base-views.home'))
 
 
 @bp.route('/logout',methods=('GET',))

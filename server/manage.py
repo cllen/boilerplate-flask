@@ -4,7 +4,7 @@ import click
 from applications import create_app
 
 from data import insert_dev_data
-# from tests import insert_test_data
+from data import insert_test_data
 
 from etc import config, DevelopmentConfig
 
@@ -20,32 +20,31 @@ def _depoly():
     if not app.db.engine.table_names() or config_setup in ['testing', 'default', 'development']:
 
         if config_setup == 'testing':
-            print('正在删除测试数据库...')
+            print('>>>> 1/3 正在删除测试数据库...')
             app.db.drop_all()
-            print('正在创建测试数据库...')
+            print('>>>> 2/3 正在创建测试数据库...')
             app.db.create_all()
             app.db.session.commit()
 
             # pre_db(app.db.session)
 
         elif config_class == DevelopmentConfig:
-            print('正在删除开发数据库...')
+            print('>>>> 1/3 正在删除开发数据库...')
             app.db.drop_all()
-            print('正在创建开发数据库...')
+            print('>>>> 2/3 正在创建开发数据库...')
             app.db.create_all()
             app.db.session.commit()
 
         else:
-            raise Exception('环境变量设置错误！')
+            raise Exception('>>>> 环境变量设置错误！')
 
-        print('正在导入数据...')
+        print('>>>> 3/3 正在导入数据...')
         insert_dev_data(app.db.session)
         app.db.session.commit()
 
-        print('创建数据库成功！')
-
+        print('>>>> 创建数据库成功！')
     else:
-        print('数据库已存在！不再创建！')
+        print('>>>> 数据库已存在！不再创建！')
 
 # 运行测试程序命令
 @app.cli.command('deploy')
@@ -55,30 +54,30 @@ def deploy():
 
 
 # 运行测试程序命令
-@app.cli.command('run-tests')
+@app.cli.command('test')
 @click.argument('test_names', nargs=-1)
-def run_tests(test_names=None):
+def test(test_names=None):
 
     """
         初始化测试数据库
     """
-    print('>>> 正在初始化数据库... <<<')
+    print('>>>> 正在初始化数据库...')
 
-    print('1/2 正在创建数据表...')
+    print('>>>> 1/2 正在创建数据表...')
 
     app.db.drop_all()
     app.db.create_all()
-    # insert_test_data(app.db.session)
+    app.db.session.commit()
+    
+
+    print('>>>> 2/2 正在插入测试数据...')
+
+    insert_test_data(app.db.session)
     app.db.session.commit()
 
-    print('2/2 正在插入测试数据...')
+    print('>>>> 初始化数据库成功!')
 
-        
-
-        
-    print('>>> 初始化数据库成功! <<<')
-        
-    print('>>> 正在运行测试...   ')
+    print('>>>> 正在运行测试...   ')
     """
         检测代码覆盖
     """
