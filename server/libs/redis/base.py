@@ -56,10 +56,10 @@ class BaseRedis:
 			self.client = redis.StrictRedis(connection_pool=self.pool)
 			self.client.ping()
 		except redis.exceptions.ConnectionError as e:
-			logger.error(
-				'>>>> redis connection error: %s',
-				traceback.format_exc(),
-			)
+			# logger.error(
+			# 	'>>>> redis connection error: %s',
+			# 	traceback.format_exc(),
+			# )
 			self.client = None
 			raise e
 

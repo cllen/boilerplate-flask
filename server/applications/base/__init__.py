@@ -56,5 +56,8 @@ class Base:
 		try:
 			redis.init(settings)
 		except Exception as e:
-			logger.warning(traceback.format_exc())
+			# logger.warning(traceback.format_exc())
+			exceptiondata = traceback.format_exc().splitlines()
+			# exceptionarray = [exceptiondata[-1]] + exceptiondata[1:-1]
+			logger.warning(">>>> applications.base.init_app() "+exceptiondata[-1])
 		self.redis=redis

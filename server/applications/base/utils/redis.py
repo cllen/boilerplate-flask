@@ -19,7 +19,8 @@ class Redis(BaseRedis, metaclass=Singleton):
 		try:
 			super().try_connect()
 		except Exception as e:
-			logger.warning(traceback.format_exc())
+			# logger.warning(traceback.format_exc())
+			raise e
 
 	@property
 	def host(self):
