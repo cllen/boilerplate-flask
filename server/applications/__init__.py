@@ -49,9 +49,7 @@ moment = Moment()
 
 def create_app(config_name='default',import_name=__name__):
 
-	"""
-		app
-	"""
+	"""app"""
 	app = Flask(
 		import_name,
 		static_url_path='/{}/statics'.format(config[config_name].PROJECT_NAME),
@@ -59,16 +57,12 @@ def create_app(config_name='default',import_name=__name__):
 		template_folder='../templates'
 	)
 
-	"""
-		config
-	"""
+	"""config"""
 	app.config.from_object(config[config_name])
 	app_context = app.app_context()
 	app_context.push()
 
-	"""
-		模板路径
-	"""
+	"""修改模板路径"""
 	template_path = os.path.abspath(
 		os.path.join(
 				os.path.dirname(__file__)
@@ -81,11 +75,7 @@ def create_app(config_name='default',import_name=__name__):
 	app.register_blueprint(bp_template)
 
 
-	"""
-		init
-	"""
-
-	# database
+	"""init database"""
 	db.init_app(app)
 	app.db = db
 	# @app.teardown_appcontext
@@ -106,7 +96,7 @@ def create_app(config_name='default',import_name=__name__):
 		)
 	)
 
-	# 其他
+	"""init modules"""
 	bootstrap.init_app(app)
 	pagedown.init_app(app)
 	moment.init_app(app)
@@ -118,8 +108,7 @@ def create_app(config_name='default',import_name=__name__):
 	# 		session['lang'] = request.args.get('lang')
 	# 	return session.get('lang', 'zh_CN')
 	
-
-	# applications
+	"""init applications"""
 	base.init_app(app,admin,db)
 	wechat.init_app(app,admin,db)
 	cms.init_app(app,admin,db)

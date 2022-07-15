@@ -19,7 +19,7 @@
 # 文档
 
 1. 安装
-    1. [bash方式安装](./docs/1.bash方式安装.md)
+    1. [shell方式安装](./docs/1.shell方式安装.md)
     2. [docker方式安装](./docs/2.docker方式安装.md)
 2. 测试
     1. [功能测试](./docs/3.功能测试.md)

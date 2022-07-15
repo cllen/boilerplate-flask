@@ -15,26 +15,23 @@ app = create_app(config_setup)
 
 def _deploy():
         
-    print('>>>> environment model:',str(config_class))
+    print('>>>> environment model:',str(config_class),'deploying...')
 
     environment_models = ['default', 'development','production']
     if config_setup not in environment_models:
         raise Exception('>>>> environment model error! it must be in '+"".join(environment_models)+"!")
 
     if config_setup in ['development','default']:
-        print('>>>> 1/3 droping databse...')
         app.db.drop_all()
-        print('>>>> 2/3 create_all()...')
         app.db.create_all()
         app.db.session.commit()
-        print('>>>> 3/3 inserting data into devlopment database...')
         insert_dev_data(app.db.session)
         app.db.session.commit()
-        print('>>>> deployed development database successfully!')
-        print('>>>> databse exists already! can not deploy again!')
 
     if config_setup == 'production':
         raise Exception(">>>> production model did not be implemented yet!")
+    
+    print('>>>> deployed successfully!')
 
 # 运行测试程序命令
 @app.cli.command('deploy')
@@ -49,20 +46,14 @@ def deploy():
 @click.argument('test_names', nargs=-1)
 def test(test_names=None):
 
-    print('>>>> environment model:',str(config_class))
+    print('>>>> environment model:',str(config_class),'testing...')
 
     """deploys database"""
-    print('>>>> 1/3 droping databse...')
     app.db.drop_all()
-    print('>>>> 2/3 create_all()...')
     app.db.create_all()
     app.db.session.commit()
-    print('>>>> 3/3 inserting data into test database...')
     insert_test_data(app.db.session)
     app.db.session.commit()
-    print('>>>> deployed development database successfully!')
-
-    print('>>>> 1/3 setting up code coverage detector...')
     
     # code coverage detector.
     COV = None
@@ -72,8 +63,6 @@ def test(test_names=None):
     COV.start()
 
     """runs tests"""
-    print('>>>> 2/3 running tests...')
-
     import unittest
     if test_names:
         tests = unittest.TestLoader().loadTestsFromNames(test_names)
@@ -83,7 +72,6 @@ def test(test_names=None):
 
 
     """makes code coverage report"""
-    print('>>>> 3/3 making code coverage report...')
     if COV:
         COV.stop()
         COV.save()
@@ -94,7 +82,7 @@ def test(test_names=None):
         COV.html_report(directory=covdir)
         print('HTML version: file://%s' % os.path.join(covdir,'index.html'))
     
-    print('>>>> has tests done!')
+    print('>>>> testing done!')
 
 if __name__ == '__main__':
     app.run(debug=True, port='80')# ,port=80,host='0.0.0.0'

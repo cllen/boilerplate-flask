@@ -14,7 +14,7 @@ logging.disable(logging.CRITICAL)
 class TestBaseTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.app = create_app('development','development')
+        self.app = create_app('testing','testing')
         self.app_context = self.app.app_context()
         self.app_context.push()
         self.client = self.app.test_client(use_cookies=True)
