@@ -6,11 +6,10 @@ from ..models import (
 
 from flask import request
 
-import logging
-logger = logging.getLogger(__name__)
+from applications import logger
 
 def login(username,password):
-    logger.debug('>>>> login')
+    logger.debug('>>>> username: %s password:%s',username,password)
     user = BaseUserModel.query.filter_by(username=username,password=password).first()
     if user:
         if request:
@@ -18,5 +17,5 @@ def login(username,password):
     else:
         logger.debug('>>>> login failed!')
         return False
-    logger.debug('>>>> login successfully!')
+    logger.debug('>>>> logined successfully!')
     return user

@@ -10,12 +10,11 @@ from ..services import login
 
 from flask import session,make_response
 
-import logging
-logger = logging.getLogger(__name__)
+from applications import logger
 
 @bp.route('/login',methods=('GET',),endpoint='login')
 def _login():
-    logger.debug('>>>> login')
+    
     if not session.get('referrer') and \
             hasattr(request,'referrer') and \
             request.referrer and \
@@ -23,9 +22,11 @@ def _login():
             'login' not in request.referrer:
         session['referrer'] = request.referrer
     username,password = parse_username_password()
+    logger.debug('>>>> username:%s password:%s',username,password)
     if not username or not password:
         return make_login_required_response()
     user = login(username,password)
+    logger.debug('>>>> user:%s',user.to_dict())
     if not user:
         return make_login_required_response()
     set_user(user.to_dict())

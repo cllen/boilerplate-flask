@@ -12,7 +12,7 @@ from flask import redirect,url_for
 
 logger = logging.getLogger(__name__)
 
-class BaseHome(QueryMixin,CurrentUserMixin,AdminIndexView):
+class BaseHome(LoginMixin,QueryMixin,CurrentUserMixin,AdminIndexView):
 	@expose('/')
 	def get(self):
 		return self.render('admin/home.html')

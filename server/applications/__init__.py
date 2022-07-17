@@ -4,6 +4,10 @@ import logging
 from utils.log import init_logging
 init_logging()
 
+import logging
+from utils.log import default_logger
+logger = logging.getLogger(default_logger)
+
 # 第三方库
 from flask import Flask, Blueprint 
 from flask_sqlalchemy import SQLAlchemy
@@ -17,14 +21,17 @@ from flask_babelex import Babel
 
 babel = Babel()
 
-# logging.basicConfig(level=logging.DEBUG)
-
 
 # 自己的库
 
+# logging.basicConfig(level=logging.DEBUG)
+# logger = logging.getLogger(__name__)
+
+
 # 避免循环导入问题，将部分实例化放到业务代码之前
 db = SQLAlchemy()
-logger = logging.getLogger(__name__)
+
+
 
 # 业务代码
 from .base import Base

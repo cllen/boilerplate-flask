@@ -51,7 +51,10 @@ class TestBaseTestCase(unittest.TestCase):
         # 重定向
         self.assertEqual(response.status_code, 302)
     
-    def test_admin_login_unconfirmed(self):
+    def test_admin_login_confirm_failed(self):
+
+        self.test_admin_login_confirmed()
+
         log_url = "{}/base/login".format(self.app.config['PROJECT_NAME'])
         response = self.client.get(
             log_url,
@@ -62,3 +65,22 @@ class TestBaseTestCase(unittest.TestCase):
         )
         # 认证失败
         self.assertEqual(response.status_code, 401)
+
+    def test_base_settings(self):
+
+        from applications.base import settings
+        from applications.base.models import BaseConfiguration as BaseConfigurationModel
+
+        test_redis_host = 'boilerplate.flask.com'
+
+        configuration = BaseConfigurationModel.query.first()
+
+        configuration_redis_host = configuration.redis_host if configuration else None
+
+        self.assertNotEqual(configuration_redis_host, test_redis_host)
+        
+        settings.redis_host = test_redis_host
+
+        configuration = BaseConfigurationModel.query.first()
+
+        self.assertEqual(configuration.redis_host, test_redis_host)
